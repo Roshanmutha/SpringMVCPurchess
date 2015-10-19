@@ -266,7 +266,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5bdc8', end
 					</c:forEach>
 				</table></div>
 				<br>
-				<button type=submit>Back to New Transaction</button>
+				<input type="button" onclick="location.href='${contextPath}/transaction/newTransaction'" value="New Transaction" />
 			</fieldset>
 
 

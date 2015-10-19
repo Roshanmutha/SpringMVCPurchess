@@ -271,11 +271,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5bdc8', end
 		<div style="width: 100%; ">
 			<fieldset>
 				<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-               <a href="${contextPath}/transaction/newTransaction">Back to new transaction</a><br><br><a href="${contextPath}/transaction/list">Back to List</a>
+               <input type="button" onclick="location.href='${contextPath}/transaction/list'" value="Back to transaction List" />
+               <input type="button" onclick="location.href='${contextPath}/transaction/newTransaction'" value="New Transaction" />
 				<br>
 			</fieldset>
 		</div>
-
 	</form:form></article>
 	<div class="footer">
 		<p>Puneri Fashion, Porwal Rd, Kutwal Colony, Lohgaon, Pune,

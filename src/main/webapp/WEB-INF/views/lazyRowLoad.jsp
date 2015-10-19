@@ -360,12 +360,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5bdc8', end
 			</fieldset>
 			<fieldset>
 				<c:set var="contextPath" value="${pageContext.request.contextPath}" />
-				<button type=submit>Save Transaction</button>
-				<br>
-				<br> <a href="${contextPath}/transaction/list">See today's
-					transactions</a><br>
-				<br> <a href="${contextPath}/transaction/newTransaction">New
-					Transaction</a>
+				<button type=submit>Save Current Transaction</button>
+				
+				<input type="button" onclick="location.href='${contextPath}/transaction/list'" value="See todays transactions" />
+				<input type="button" onclick="location.href='${contextPath}/transaction/newTransaction'" value="New Transaction" />
 			</fieldset>
 
 	</form:form>
