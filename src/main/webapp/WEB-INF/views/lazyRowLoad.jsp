@@ -8,6 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Puneri Fashion- New Transaction</title>
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid Sans">
+ <link rel="icon" type="image/png" href="https://lh4.googleusercontent.com/-9mX7EkT3a9s/VdrvXWJkOoI/AAAAAAAAAJ8/W0-v22piE_0/w1597-h525-no/" />
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script type="text/javascript"

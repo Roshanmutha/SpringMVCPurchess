@@ -210,7 +210,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5bdc8', end
 <header>
 <h3 class="total-balance">
 		Puneri Fashion
-		<div id="dateTime" class="dateTime">Current Time : <span id="time"></span></div>
+		<div id="dateTime" class="dateTime"> <span id="time"></span></div>
 	</h3>
 </header>
 	<article class="content">
