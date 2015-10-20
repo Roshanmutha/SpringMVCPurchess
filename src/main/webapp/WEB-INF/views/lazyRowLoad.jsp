@@ -501,7 +501,7 @@ input[type="checkbox"] {
 											<!-- <INPUT type='text'
 									name="operationParameterses[0].items"
 									placeholder="Enter Number Of Items!"/> --> <select
-											name="operationParameterses[0].items" style="width: 45px">
+											name="operationParameterses[0].items" style="width: 50px">
 												<%
 													for (int i = 1; i < 101; i++) {
 												%>
