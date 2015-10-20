@@ -56,4 +56,10 @@ public class TransactionServiceImpl implements TransactionService {
 		return this.transactionDAO.listTransactions(datefrom, dateto);
 	}
 
+	@Override
+	public List<Transaction> listTransactions(String mobile) {
+		// TODO Auto-generated method stub
+		return this.transactionDAO.listTransactions(mobile);
+	}
+
 }

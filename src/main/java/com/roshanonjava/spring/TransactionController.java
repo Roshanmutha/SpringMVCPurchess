@@ -124,6 +124,17 @@ public class TransactionController {
 
 	}
 	
+	@RequestMapping(value = "/reportsByMobile", method = RequestMethod.POST)
+	public ModelAndView reportsByMobile(@ModelAttribute ("report") Report report) {
+		List<Transaction> transactionList = transactionService
+				.listTransactions(report.getMobile());
+		ModelAndView mav = new ModelAndView("transactionList");
+		mav.addObject("transactionList", transactionList);
+		mav.addObject("report", report);
+		return mav;
+
+	}
+	
 	
 	@RequestMapping(value = "/detail/{orderId}", method = RequestMethod.GET)
 	public ModelAndView loadTransactionDetails(@PathVariable String orderId) {

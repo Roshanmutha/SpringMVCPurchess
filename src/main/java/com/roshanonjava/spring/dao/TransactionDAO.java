@@ -20,5 +20,5 @@ public interface TransactionDAO {
 
 	public List<Transaction> listTransactions(String datefrom, String dateto);
 	
-	
+	public List<Transaction> listTransactions(String mobile);
 }

@@ -232,6 +232,21 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5bdc8', end
 				</table></div>
 			</form:form>
 		</fieldset>
+		<fieldset>
+			<legend>View Reports by Mobile Number</legend>
+			<form:form commandName="report" action="reportsByMobile" method="post">
+				<div class="CSSTableGenerator" ><table>
+
+					<tr>
+						<td>Mobile: <form:input path="mobile"/></td>
+						
+
+					</tr>
+					<td colspan="2"><button type=submit>Submit</button></td>
+					<tr>
+				</table></div>
+			</form:form>
+		</fieldset>
 	</div>
 	<form:form commandName="transactionHolder" action="newTransaction"
 		method="get">
