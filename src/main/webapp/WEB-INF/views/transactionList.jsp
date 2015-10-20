@@ -244,6 +244,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5bdc8', end
 				<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 				<div class="CSSTableGenerator" ><table >
 					<tr bgcolor="Grey">
+						<td>Invoice ID</td>
 						<td>Name</td>
 						<td>Mobile</td>
 						<td>Area</td>
@@ -253,7 +254,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5bdc8', end
 					</tr>
 					<c:forEach var="transaction" items="${transactionList}">
 						<tr>
-
+							<td><c:out value="${transaction.id}" /></td>
 							<td><c:out value="${transaction.name}" /></td>
 							<td><c:out value="${transaction.mobile}" /></td>
 							<td><c:out value="${transaction.area}" /></td>
