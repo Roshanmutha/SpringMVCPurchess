@@ -430,6 +430,7 @@ input[type="checkbox"] {
 		<header>
 		<h3 class="total-balance">
 			Puneri Fashion
+			
 			<div id="dateTime" class="dateTime">
 				<span id="time"></span>
 			</div>
@@ -444,6 +445,11 @@ input[type="checkbox"] {
 						type="text" name="mobileSearch"> <input type="submit"
 						name="Search" value="Search Customer" /></li>
 				</ol>
+				<c:if test="${not empty mobileErrorMessage}">
+					<ol>
+					<li><h3 style="color: red">${mobileErrorMessage}</h3></li>
+					</ol>
+				</c:if>
 			</fieldset>
 		</form:form> <form:form action="loadTransaction" method="post">
 			<fieldset>
@@ -453,6 +459,11 @@ input[type="checkbox"] {
 						type="text" name="transactionid"> <input type="submit"
 						name="Search" value="Search Invoice" /></li>
 				</ol>
+				<c:if test="${not empty transactionErrorMessage}">
+					<ol>
+					<li><h3 style="color: red">${transactionErrorMessage}</h3></li>
+					</ol>
+				</c:if>
 			</fieldset>
 		</form:form> <form:form commandName="transactionHolder" action="newTransaction"
 			method="post">

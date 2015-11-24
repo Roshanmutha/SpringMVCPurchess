@@ -92,7 +92,11 @@ public class TransactioDAOImpl implements TransactionDAO {
 		Criteria cr = session.createCriteria(Transaction.class);
 		cr.add(Restrictions.eq("mobile", mobile));
 		List<Transaction> list = cr.list();
+		if(list!=null &&list.size()>0){
 	    return list.get(0);
+		}else{
+			return null;
+		}
 	}
 	
 
@@ -119,7 +123,7 @@ public class TransactioDAOImpl implements TransactionDAO {
 			c.setTime(DateUtils.convertToDate(dateto));
 			c.add(Calendar.DATE, 1);
 			c.getTime();
-			list = session.createQuery("FROM Transaction AS c WHERE c.createdDate BETWEEN :stDate AND :edDate ")
+			list = session.createQuery("FROM Transaction AS c WHERE c.createdDate BETWEEN :stDate AND :edDate  ORDER BY c.createdDate ASC")
 			.setParameter("stDate", DateUtils.convertToDate(datefrom))
 			.setParameter("edDate", c.getTime())
 			.list();

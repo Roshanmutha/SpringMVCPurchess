@@ -67,7 +67,7 @@ public class ItemDAOImpl implements ItemDAO {
 	@Override
 	public List<Item> listItems() {
 		Session session = this.sessionFactory.getCurrentSession();
-		List<Item> ItemList = session.createQuery("from Item").list();
+		List<Item> ItemList = session.createQuery("SELECT I.id Item I").list();
 		for(Item p : ItemList){
 			logger.info("Item List::"+p);
 		}

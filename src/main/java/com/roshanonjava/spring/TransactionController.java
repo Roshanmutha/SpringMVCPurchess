@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -77,6 +78,17 @@ public class TransactionController {
 		System.out.println(mobileSearch);
 		Transaction load = transactionService
 				.getTransactionByMobile(mobileSearch);
+		if(load==null){
+			ModelAndView mav = new ModelAndView("lazyRowLoad");
+			mav.addObject("transactionHolder", transactionHolder);
+			if(mobileSearch.isEmpty()){
+				mav.addObject("mobileErrorMessage", "Customer mobile should not be empty!!");
+			}else {
+				mav.addObject("mobileErrorMessage", "Customer Not Found !");
+			}
+			
+			return mav;
+		}
 		transactionHolder.setName(load.getName());
 		transactionHolder.setArea(load.getArea());
 		transactionHolder.setPhone(load.getMobile());
@@ -92,8 +104,13 @@ public class TransactionController {
 	
 	@RequestMapping(value = "/loadTransaction", method = RequestMethod.POST)
 	public String loadTransaction(
-			@RequestParam("transactionid") String transactionid) {
+			@RequestParam("transactionid") String transactionid,Model model) {
 		System.out.println(transactionid);
+		if(transactionid.isEmpty()){
+			model.addAttribute("transactionErrorMessage", "Invoice ID should not be empty!!");
+			model.addAttribute("transactionHolder", new TransactionHolder());
+			return "lazyRowLoad";
+		}
 		return "redirect:detail/"+transactionid;
 
 	}
@@ -137,13 +154,16 @@ public class TransactionController {
 	
 	@RequestMapping(value = "/detail/{orderId}", method = RequestMethod.GET)
 	public ModelAndView loadTransactionDetails(@PathVariable String orderId) {
-		
-		List<Item> itemList = itemService.getItemByTransactionId(Integer.parseInt(orderId));
 		ModelAndView mav = new ModelAndView("transactionDetails");
-		mav.addObject("itemList", itemList);
 		try {
+			int orderID= Integer.parseInt(orderId);
+			List<Item> itemList = itemService.getItemByTransactionId(orderID);
+			mav.addObject("itemList", itemList);
 			mav.addObject("transaction", transactionService.getTransactionById(Integer.parseInt(orderId)));
-		} catch (Exception e) {
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
