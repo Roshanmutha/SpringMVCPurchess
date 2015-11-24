@@ -63,7 +63,16 @@ public class TransactionController {
 
 		// TransactionHolder users=new TransactionHolder();
 		ModelAndView mav = new ModelAndView("lazyRowLoadShow");
-		saveTransaction(transactionHolder);
+		try {
+			saveTransaction(transactionHolder);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			if(e.getMessage().equals("items.incorrect")){
+				ModelAndView mav1 = new ModelAndView("lazyRowLoad");
+				mav1.addObject("transactionSaveErrorMessage", "Items information is not correct!!");
+				return mav1;
+			}
+		}
 		transactionHolder.cleanUp();
 		mav.addObject("transactionHolder1", transactionHolder);
 		mav.addObject("transactionHolder", new TransactionHolder());
@@ -172,9 +181,16 @@ public class TransactionController {
 	}
 
 	private void saveTransaction(TransactionHolder transactionHolder)
-			throws ParseException {
+			throws Exception {
 		// TODO Auto-generated method stub
 		int amount = 0;
+		List<OperationParameters> listOfItems = transactionHolder
+				.getOperationParameterses();
+		for (OperationParameters operationParameters : listOfItems) {
+			if(operationParameters.getName().isEmpty() ||operationParameters.getPrice().isEmpty()){
+				throw new Exception("items.incorrect");
+			}
+		}
 		Transaction transaction = new Transaction();
 		transaction.setArea(transactionHolder.getArea());
 		transaction.setMobile(transactionHolder.getPhone());
@@ -186,8 +202,6 @@ public class TransactionController {
 		transaction.setBirthDate(formatter1.parse(transactionHolder.getDob()));
 		transactionService.addTransaction(transaction);
 		transactionHolder.setInvoiceNumber(String.valueOf(transaction.getId()));
-		List<OperationParameters> listOfItems = transactionHolder
-				.getOperationParameterses();
 		for (OperationParameters operationParameters : listOfItems) {
 			Item item = new Item();
 			if(operationParameters.getItems()==null&&operationParameters.getName()==null&&operationParameters.getPrice()==null){

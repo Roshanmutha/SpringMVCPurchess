@@ -88,6 +88,7 @@
 			alert(e);
 		}
 	}
+	
 </SCRIPT>
 
 <style type="text/css">
@@ -467,6 +468,7 @@ input[type="checkbox"] {
 			</fieldset>
 		</form:form> <form:form commandName="transactionHolder" action="newTransaction"
 			method="post">
+			
 			<fieldset>
 				<legend>New Transaction</legend>
 				<ol>
@@ -490,10 +492,17 @@ input[type="checkbox"] {
 							path="phone" type="text" required="true"
 							placeholder="Enter Phone number!" /></li>
 
-					<li><legend>Purchess details : </legend><br>
+					<li><legend>Purchess details : </legend>
+					<c:if test="${not empty transactionSaveErrorMessage}">
+					<br>
+					<h3 style="color: red">${transactionSaveErrorMessage}</h3>
+					<br>
+				</c:if>
+					<br>
 						<div class="CSSTableGenerator">
-
+						
 							<div class="CSSTableGenerator">
+							
 								<table id="dataTable">
 									<tr bgcolor="Grey">
 										<td>Select</td>
