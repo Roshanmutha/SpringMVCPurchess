@@ -6,6 +6,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.roshanonjava.spring.dao.TransactioDAOImpl;
 import com.roshanonjava.spring.model.Item;
 import com.roshanonjava.spring.model.OperationParameters;
 import com.roshanonjava.spring.model.Report;
@@ -30,6 +33,9 @@ import com.roshanonjava.util.DateUtils;
 @RequestMapping(value = "/transaction")
 public class TransactionController {
 
+	private static final Logger logger = LoggerFactory.getLogger(TransactionController.class);
+
+	
 	private TransactionService transactionService;
 
 	@Autowired(required = true)
@@ -50,6 +56,7 @@ public class TransactionController {
 	public ModelAndView printWelcome(
 			@ModelAttribute("transactionHolder") TransactionHolder transactionHolder) {
 		transactionHolder.setDob(DateUtils.convertFromDate(new Date()));
+		
 		ModelAndView mav = new ModelAndView("lazyRowLoad");
 		mav.addObject("message", "Hello World!!!");
 		return mav;
@@ -65,15 +72,18 @@ public class TransactionController {
 		ModelAndView mav = new ModelAndView("lazyRowLoadShow");
 		try {
 			saveTransaction(transactionHolder);
+			logger.debug("Saved {} transaction to db!",transactionHolder );
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			if(e.getMessage()!=null && e.getMessage().equals("items.incorrect")){
 				ModelAndView mav1 = new ModelAndView("lazyRowLoad");
 				mav1.addObject("transactionSaveErrorMessage", "Purchess details information is not correct!!");
+				logger.debug("Items incorrect Error in {} transaction to db!",transactionHolder );
 				return mav1;
 			}else{
 				ModelAndView mav1 = new ModelAndView("lazyRowLoad");
 				mav1.addObject("transactionSaveErrorMessage", "Something Went Wrong!!");
+				logger.debug("UnExpected Error in {} transaction to db!",transactionHolder );
 				return mav1;
 			}
 		}
@@ -89,6 +99,7 @@ public class TransactionController {
 			@RequestParam("mobileSearch") String mobileSearch,
 			@ModelAttribute("transactionHolder") TransactionHolder transactionHolder) {
 		System.out.println(mobileSearch);
+		logger.debug("UnExpected Error in {} transaction to db!", transactionHolder, "mobile", mobileSearch );
 		Transaction load = transactionService
 				.getTransactionByMobile(mobileSearch);
 		if(load==null){
@@ -119,6 +130,7 @@ public class TransactionController {
 	public String loadTransaction(
 			@RequestParam("transactionid") String transactionid,Model model) {
 		System.out.println(transactionid);
+		logger.debug( "loaded transaction by {} transaction id", transactionid );
 		if(transactionid.isEmpty()){
 			model.addAttribute("transactionErrorMessage", "Invoice ID should not be empty!!");
 			model.addAttribute("transactionHolder", new TransactionHolder());
