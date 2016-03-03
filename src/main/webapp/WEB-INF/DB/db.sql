@@ -1,4 +1,19 @@
 
+
+CREATE TABLE `person` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) DEFAULT NULL,
+  `country` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `person_detail` (
+  `id` int(11) NOT NULL,
+  `job` varchar(45) DEFAULT NULL,
+  `zipcode` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 CREATE TABLE `transaction` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `created_date` datetime NOT NULL,
@@ -10,7 +25,7 @@ CREATE TABLE `transaction` (
   `birth_date` datetime DEFAULT NULL,
   `email` varchar(45) NOT NULL DEFAULT 'Not Provided',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=98 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=169 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `item` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -25,6 +40,7 @@ CREATE TABLE `item` (
   PRIMARY KEY (`id`),
   KEY `TransactionFKEY_idx` (`t_id`),
   CONSTRAINT `TransactionFKEY` FOREIGN KEY (`t_id`) REFERENCES `transaction` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=152 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 
