@@ -69,7 +69,7 @@ public class TransactionController {
 			// TODO Auto-generated catch block
 			if(e.getMessage().equals("items.incorrect")){
 				ModelAndView mav1 = new ModelAndView("lazyRowLoad");
-				mav1.addObject("transactionSaveErrorMessage", "Items information is not correct!!");
+				mav1.addObject("transactionSaveErrorMessage", "Purchess details information is not correct!!");
 				return mav1;
 			}
 		}
