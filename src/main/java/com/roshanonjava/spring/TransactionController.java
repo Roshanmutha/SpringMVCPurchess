@@ -67,9 +67,13 @@ public class TransactionController {
 			saveTransaction(transactionHolder);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			if(e.getMessage().equals("items.incorrect")){
+			if(e.getMessage()!=null && e.getMessage().equals("items.incorrect")){
 				ModelAndView mav1 = new ModelAndView("lazyRowLoad");
 				mav1.addObject("transactionSaveErrorMessage", "Purchess details information is not correct!!");
+				return mav1;
+			}else{
+				ModelAndView mav1 = new ModelAndView("lazyRowLoad");
+				mav1.addObject("transactionSaveErrorMessage", "Something Went Wrong!!");
 				return mav1;
 			}
 		}
